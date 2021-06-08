@@ -1,6 +1,6 @@
 {
   "name": "ghost-app",
-  "homepage": "http://k2bd.github.io/ghost-app",
+  "homepage": "http://k2bd.github.io/ghost",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
