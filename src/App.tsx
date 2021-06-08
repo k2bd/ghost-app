@@ -13,7 +13,7 @@ const App: React.FC = () => {
             <HashRouter basename="/">
                 <Switch>
                     <Route path="/" exact component={JoinGamePage} />
-                    <Route path="/:roomCode" component={GamePage} />
+                    <Route path="/room/:roomCode" component={GamePage} />
 
                     <Redirect to="/" />
                 </Switch>
