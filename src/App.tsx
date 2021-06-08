@@ -12,8 +12,8 @@ function App() {
         <div className="App">
             <HashRouter basename="/">
                 <Switch>
-                    <Route path="/ghost" exact component={JoinGamePage} />
-                    <Route path="/ghost/:roomCode" component={GamePage} />
+                    <Route path="/ghost-app" exact component={JoinGamePage} />
+                    <Route path="/ghost-app/:roomCode" component={GamePage} />
 
                     <Redirect to="/ghost" />
                 </Switch>
