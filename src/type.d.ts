@@ -5,7 +5,7 @@ type Player = {
 type Position = {
     x: number;
     y: number;
-}
+};
 
 type Move = {
     playerName: string;

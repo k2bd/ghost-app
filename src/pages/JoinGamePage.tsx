@@ -1,10 +1,12 @@
 import { Alignment, Navbar } from '@blueprintjs/core';
 import React from 'react';
 import Donate from '../components/Donate';
+import GameJoinInfo from '../components/GameJoinInfo';
+import './JoinGamePage.css';
 
 const JoinGamePage: React.FC = () => {
     return (
-        <div>
+        <div className="game-join-page">
             <Navbar>
                 <Navbar.Group align={Alignment.RIGHT}>
                     <Navbar.Heading>2d Ghost</Navbar.Heading>
@@ -12,7 +14,9 @@ const JoinGamePage: React.FC = () => {
                     <Donate />
                 </Navbar.Group>
             </Navbar>
-            <p>Welcome</p>
+            <div className="vertical-centering">
+                <GameJoinInfo joinGame={(roomCode, playerName) => console.log(roomCode, playerName)} />
+            </div>
         </div>
     );
 };
