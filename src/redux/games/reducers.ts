@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createGame, fetchGameByRoomCode } from './actions';
-
-type GameLoadStatus = 'idle' | 'loading' | 'gameDoesNotExist' | 'creatingGame' | 'error';
+import { createGame, fetchGameByRoomCode, joinGame } from './actions';
 
 const gamesSlice = createSlice({
     name: 'games',
@@ -22,7 +20,8 @@ const gamesSlice = createSlice({
         });
         builder.addCase(fetchGameByRoomCode.rejected, (state, action) => {
             state.game = null;
-            state.gameLoadStatus = 'error';
+            //state.gameLoadStatus = 'error';
+            state.gameLoadStatus = 'gameDoesNotExist'; // TEMP
             if (action.payload) {
                 if (action.payload.statusCode == 404) {
                     state.gameLoadStatus = 'gameDoesNotExist';
@@ -40,6 +39,18 @@ const gamesSlice = createSlice({
         builder.addCase(createGame.rejected, (state, action) => {
             state.game = null;
             state.gameLoadStatus = 'error';
+        });
+        builder.addCase(joinGame.pending, (state, action) => {
+            state.gameLoadStatus = 'joining';
+            state.joined = false;
+        });
+        builder.addCase(joinGame.fulfilled, (state, action) => {
+            state.gameLoadStatus = 'idle';
+            state.joined = true;
+        });
+        builder.addCase(joinGame.rejected, (state, action) => {
+            state.gameLoadStatus = 'error';
+            state.joined = false;
         });
     },
 });

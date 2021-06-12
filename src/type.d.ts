@@ -19,3 +19,5 @@ type Game = {
     turnPlayerName: string;
     moves: Move[];
 };
+
+type GameLoadStatus = 'idle' | 'loading' | 'gameDoesNotExist' | 'creatingGame' | 'error' | 'joining';

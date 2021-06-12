@@ -3,7 +3,7 @@ import gamesSlice from './games/reducers';
 import playerReducer from './player/reducers';
 
 const rootReducer = combineReducers({
-    games: gamesSlice.reducer,
+    game: gamesSlice.reducer,
     player: playerReducer,
 });
 
