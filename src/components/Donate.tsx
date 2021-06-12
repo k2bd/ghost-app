@@ -6,7 +6,7 @@ const Donate: React.FC = () => {
         window.open('https://www.buymeacoffee.com/k2bd', '_blank');
     };
 
-    return <Button icon="dollar" text="Buy me a coffee" onClick={onClick} />;
+    return <Button icon="dollar" text="Buy me a coffee" onClick={onClick} intent="primary" />;
 };
 
 export default Donate;

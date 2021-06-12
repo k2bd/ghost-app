@@ -2,10 +2,14 @@ type Player = {
     name: string;
 };
 
+type Position = {
+    x: number;
+    y: number;
+}
+
 type Move = {
     playerName: string;
-    positionX: number;
-    positionY: number;
+    position: Position;
     letter: string;
 };
 
