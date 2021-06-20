@@ -1,10 +1,8 @@
-import { Alignment, Navbar } from '@blueprintjs/core';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import Donate from '../components/Donate';
 import GameJoinInfo from '../components/GameJoinInfo';
-import HowToPlay from '../components/HowToPlay';
+import GhostNavbar from '../components/GhostNavbar';
 import { setPlayerName } from '../redux/player/actions';
 import './JoinGamePage.css';
 
@@ -19,16 +17,7 @@ const JoinGamePage: React.FC = () => {
 
     return (
         <div className="game-join-page">
-            <Navbar>
-                <Navbar.Group align={Alignment.LEFT}>
-                    <Navbar.Heading>2D Ghost</Navbar.Heading>
-                </Navbar.Group>
-                <Navbar.Group align={Alignment.RIGHT}>
-                    <HowToPlay />
-                    <Navbar.Divider />
-                    <Donate />
-                </Navbar.Group>
-            </Navbar>
+            <GhostNavbar />
             <div className="vertical-centering">
                 <GameJoinInfo joinGame={(roomCode, playerName) => joinGame(roomCode, playerName)} />
             </div>
