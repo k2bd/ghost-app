@@ -21,6 +21,9 @@ const GameTile: React.FC<Props> = ({ letter, position, isPlayable, isMostRecentl
 
     const submitMove = (letter: string) => {
         const upperLetter = letter.toUpperCase();
+        if (!/[A-Z]/.test(upperLetter)) {
+            return;
+        }
 
         if (game !== null && player !== null) {
             dispatch(
