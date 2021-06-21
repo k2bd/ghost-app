@@ -27,8 +27,16 @@ const GameJoinInfo: React.FC<Props> = ({ joinGame }: Props) => {
         <div>
             <Card elevation={2}>
                 <h2>Join a Game</h2>
-                <InputGroup onChange={(event) => setRoomCode(event.target.value)} placeholder="Room Code..." />
-                <InputGroup onChange={(event) => setPlayerName(event.target.value)} placeholder="Player Name..." />
+                <InputGroup
+                    maxLength={10}
+                    onChange={(event) => setRoomCode(event.target.value)}
+                    placeholder="Room Code..."
+                />
+                <InputGroup
+                    maxLength={10}
+                    onChange={(event) => setPlayerName(event.target.value)}
+                    placeholder="Player Name..."
+                />
                 <Button
                     text="Join"
                     intent={Intent.PRIMARY}

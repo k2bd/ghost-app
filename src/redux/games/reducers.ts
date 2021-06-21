@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createGame, fetchGameByRoomCode, joinGame } from './actions';
+import { createGame, fetchGameByRoomCode, joinGame, makeMove } from './actions';
 
 const gamesSlice = createSlice({
     name: 'games',
@@ -11,7 +11,6 @@ const gamesSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(fetchGameByRoomCode.pending, (state, action) => {
-            state.game = null;
             state.gameLoadStatus = 'loading';
         });
         builder.addCase(fetchGameByRoomCode.fulfilled, (state, action) => {
@@ -47,10 +46,17 @@ const gamesSlice = createSlice({
         builder.addCase(joinGame.fulfilled, (state, action) => {
             state.gameLoadStatus = 'idle';
             state.joined = true;
+            state.game = action.payload;
         });
         builder.addCase(joinGame.rejected, (state, action) => {
             state.gameLoadStatus = 'error';
             state.joined = false;
+        });
+        builder.addCase(makeMove.pending, (state, action) => {
+            // TODO
+        });
+        builder.addCase(makeMove.fulfilled, (state, action) => {
+            state.game = action.payload;
         });
     },
 });

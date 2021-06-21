@@ -14,3 +14,20 @@
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
 }
+
+.with-sidebar {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.sidebar {
+    flex-basis: 20rem;
+    max-width: 15%;
+    flex-grow: 1;
+}
+
+.not-sidebar {
+    flex-basis: 0;
+    flex-grow: 999;
+    min-width: 50%;
+}

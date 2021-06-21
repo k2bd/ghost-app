@@ -1,12 +1,17 @@
+import { Divider } from '@blueprintjs/core';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+import useInterval from 'react-useinterval';
 import GameBoard from '../components/GameBoard';
 import GhostNavbar from '../components/GhostNavbar';
+import PlayersList from '../components/PlayersList';
 import { createGame, fetchGameByRoomCode, joinGame } from '../redux/games/actions';
 import { RootState } from '../redux/store';
 
 import './GamePage.css';
+
+const POLLING_INTERVAL_MS = 1000;
 
 const GamePage: React.FC = () => {
     const { roomCode } = useParams<{ roomCode: string }>();
@@ -38,10 +43,24 @@ const GamePage: React.FC = () => {
         }
     }
 
+    // Poll game state, for now
+    useInterval(() => dispatch(fetchGameByRoomCode(roomCode)), POLLING_INTERVAL_MS);
+
     return (
-        <div className="game-page">
+        <div>
             <GhostNavbar roomCode={roomCode} />
-            <GameBoard />
+            <div className="with-sidebar">
+                <div className="sidebar">
+                    <PlayersList />
+                </div>
+                <div className="not-sidebar">
+                    <div className="game-page">
+                        <div className="vertical-centering">
+                            <GameBoard />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
