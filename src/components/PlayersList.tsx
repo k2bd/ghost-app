@@ -13,11 +13,7 @@ const PlayerRow: React.FC<PlayerProps> = ({ player }: PlayerProps) => {
 const PlayersList: React.FC = () => {
     const { game } = useSelector((state: RootState) => state.game);
 
-    if (game === null) {
-        return <></>;
-    }
-
-    const players = game?.players.map((player, index) => <PlayerRow player={player} key={index} />);
+    const players = game ? game.players.map((player, index) => <PlayerRow player={player} key={index} />) : [];
 
     return (
         <>

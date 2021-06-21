@@ -15,7 +15,6 @@ const neighborCount = (tiles: (string | null)[][], { x, y }: Position): number =
         .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
 const isPlayable = (tiles: (string | null)[][], { x, y }: Position): boolean => {
-    console.log(tiles);
     if (tiles[x][y] !== null) {
         return false;
     } else if (x === 0 && y === 0) {

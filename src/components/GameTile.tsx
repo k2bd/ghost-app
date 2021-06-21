@@ -17,13 +17,11 @@ const GameTile: React.FC<Props> = ({ letter, position, isPlayable, isMostRecentl
     const player = useSelector((state: RootState) => state.player.localPlayer);
     const { game } = useSelector((state: RootState) => state.game);
 
-    const [displayLetter, setDisplayLetter] = useState<string>(letter || '');
     const dispatch = useDispatch();
 
     const submitMove = (letter: string) => {
         const upperLetter = letter.toUpperCase();
 
-        setDisplayLetter(upperLetter);
         if (game !== null && player !== null) {
             dispatch(
                 makeMove({
@@ -40,7 +38,7 @@ const GameTile: React.FC<Props> = ({ letter, position, isPlayable, isMostRecentl
         <input
             type="text"
             disabled={inputDisabled}
-            value={displayLetter}
+            value={letter || ''}
             size={1}
             onChange={(event) => submitMove(event.target.value)}
         />
