@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeMove } from '../redux/games/actions';
 import { RootState } from '../redux/store';
