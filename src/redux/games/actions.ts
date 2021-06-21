@@ -7,7 +7,7 @@ interface Error {
 
 export const fetchGameByRoomCode = createAsyncThunk<Game, string, { rejectValue: Error }>(
     'games/fetchGameByRoomCode',
-    async (roomCode, thunkApi) => {
+    async (roomCode) => {
         const response = await ghostApi.get(`/game/${roomCode}`);
         return response.data as Game;
     },

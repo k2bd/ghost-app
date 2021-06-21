@@ -34,8 +34,8 @@ const isPlayable = (tiles: (string | null)[][], { x, y }: Position): boolean => 
 const GameBoard: React.FC = () => {
     const { game } = useSelector((state: RootState) => state.game);
 
-    const tiles: (string | null)[][] = Array.from(Array(10).keys()).map((x) =>
-        Array.from(Array(10).keys()).map((y) => null),
+    const tiles: (string | null)[][] = Array.from(Array(10).keys()).map(() =>
+        Array.from(Array(10).keys()).map(() => null),
     );
     if (game !== null) {
         game.moves.forEach((move) => (tiles[move.position.x][move.position.y] = move.letter));

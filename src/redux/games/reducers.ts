@@ -10,7 +10,7 @@ const gamesSlice = createSlice({
     },
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(fetchGameByRoomCode.pending, (state, action) => {
+        builder.addCase(fetchGameByRoomCode.pending, (state) => {
             state.gameLoadStatus = 'loading';
         });
         builder.addCase(fetchGameByRoomCode.fulfilled, (state, action) => {
@@ -27,7 +27,7 @@ const gamesSlice = createSlice({
                 }
             }
         });
-        builder.addCase(createGame.pending, (state, action) => {
+        builder.addCase(createGame.pending, (state) => {
             state.game = null;
             state.gameLoadStatus = 'loading';
         });
@@ -35,11 +35,11 @@ const gamesSlice = createSlice({
             state.game = action.payload;
             state.gameLoadStatus = 'idle';
         });
-        builder.addCase(createGame.rejected, (state, action) => {
+        builder.addCase(createGame.rejected, (state) => {
             state.game = null;
             state.gameLoadStatus = 'error';
         });
-        builder.addCase(joinGame.pending, (state, action) => {
+        builder.addCase(joinGame.pending, (state) => {
             state.gameLoadStatus = 'joining';
             state.joined = false;
         });
@@ -48,11 +48,11 @@ const gamesSlice = createSlice({
             state.joined = true;
             state.game = action.payload;
         });
-        builder.addCase(joinGame.rejected, (state, action) => {
+        builder.addCase(joinGame.rejected, (state) => {
             state.gameLoadStatus = 'error';
             state.joined = false;
         });
-        builder.addCase(makeMove.pending, (state, action) => {
+        builder.addCase(makeMove.pending, () => {
             // TODO
         });
         builder.addCase(makeMove.fulfilled, (state, action) => {
