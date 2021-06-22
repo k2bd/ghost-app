@@ -16,7 +16,7 @@ jobs:
           yarn install
           yarn build
         env:
-          REACT_APP_GHOST_API_URL: https://ywub82hzp4.execute-api.us-east-1.amazonaws.com/main
+          REACT_APP_GHOST_API_URL: https://ce5muj9w5f.execute-api.eu-west-2.amazonaws.com/main
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.4
