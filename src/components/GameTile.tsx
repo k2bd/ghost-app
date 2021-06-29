@@ -40,6 +40,7 @@ const GameTile: React.FC<Props> = ({ letter, position, isPlayable, isMostRecentl
     const content = (
         <input
             type="text"
+            className="tile-input"
             disabled={inputDisabled}
             value={letter || ''}
             size={1}

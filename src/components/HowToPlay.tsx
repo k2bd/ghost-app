@@ -1,13 +1,16 @@
 import { Button, Dialog, Intent } from '@blueprintjs/core';
 import { DIALOG_BODY } from '@blueprintjs/core/lib/esm/common/classes';
 import React, { useState } from 'react';
+import { isMobile } from 'react-device-detect';
 
 const HowToPlay: React.FC = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
+    const buttonText = isMobile ? '' : 'How to play';
+
     return (
         <div>
-            <Button icon="info-sign" text="How to play" onClick={() => setIsOpen(true)} intent={Intent.PRIMARY} />
+            <Button icon="info-sign" text={buttonText} onClick={() => setIsOpen(true)} intent={Intent.PRIMARY} />
             <Dialog icon="info-sign" onClose={() => setIsOpen(false)} title="How to play 2D Ghost" isOpen={isOpen}>
                 <div className={DIALOG_BODY}>
                     <h3>Overview</h3>
