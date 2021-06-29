@@ -30,11 +30,23 @@ const isPlayable = (tiles: (string | null)[][], { x, y }: Position): boolean => 
     }
 };
 
+/**
+ * Get the size of the board to display
+ */
+const boardSize = (moves: Move[]): number => {
+    const moveWidth = moves
+        .map((move) => Math.max(move.position.x, move.position.y))
+        .reduce((accumulator, currentValue) => Math.max(accumulator, currentValue), 0);
+
+    return moveWidth + 2;
+};
+
 const GameBoard: React.FC = () => {
     const { game } = useSelector((state: RootState) => state.game);
 
-    const tiles: (string | null)[][] = Array.from(Array(10).keys()).map(() =>
-        Array.from(Array(10).keys()).map(() => null),
+    const size = boardSize(game ? game.moves : []);
+    const tiles: (string | null)[][] = Array.from(Array(size).keys()).map(() =>
+        Array.from(Array(size).keys()).map(() => null),
     );
     if (game !== null) {
         game.moves.forEach((move) => (tiles[move.position.x][move.position.y] = move.letter));
