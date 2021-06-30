@@ -7,7 +7,7 @@ const Donate: React.FC = () => {
         window.open('https://www.buymeacoffee.com/k2bd', '_blank');
     };
 
-    const buttonText = isMobile ? '' : 'Buy me a coffee';
+    const buttonText = isMobile ? '' : 'Support';
 
     return <Button icon="dollar" text={buttonText} onClick={onClick} intent="primary" />;
 };

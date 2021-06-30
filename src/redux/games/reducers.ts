@@ -1,5 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createGame, fetchGameByRoomCode, joinGame, makeMove } from './actions';
+import {
+    createGame,
+    fetchGameByRoomCode,
+    joinGame,
+    makeChallenge,
+    makeChallengeResponse,
+    makeChallengeVote,
+    makeMove,
+} from './actions';
 
 const gamesSlice = createSlice({
     name: 'games',
@@ -56,6 +64,15 @@ const gamesSlice = createSlice({
             // TODO
         });
         builder.addCase(makeMove.fulfilled, (state, action) => {
+            state.game = action.payload;
+        });
+        builder.addCase(makeChallenge.fulfilled, (state, action) => {
+            state.game = action.payload;
+        });
+        builder.addCase(makeChallengeResponse.fulfilled, (state, action) => {
+            state.game = action.payload;
+        });
+        builder.addCase(makeChallengeVote.fulfilled, (state, action) => {
             state.game = action.payload;
         });
     },
