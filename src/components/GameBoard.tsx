@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import GameTile from './GameTile';
+import deepEqual from 'deep-equal';
 
 const neighborCount = (tiles: (string | null)[][], { x, y }: Position): number =>
     tiles
@@ -59,7 +60,7 @@ const GameBoard: React.FC = () => {
                     letter={tile}
                     position={{ x, y }}
                     isPlayable={isPlayable(tiles, { x, y })}
-                    isMostRecentlyPlayed={game?.moves[game.moves.length - 1]?.position === { x, y }}
+                    isMostRecentlyPlayed={deepEqual(game?.moves[game.moves.length - 1]?.position, { x, y })}
                     key={y}
                 />
             ))}

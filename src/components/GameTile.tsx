@@ -12,7 +12,7 @@ type Props = {
 };
 
 const GameTile: React.FC<Props> = ({ letter, position, isPlayable, isMostRecentlyPlayed }: Props) => {
-    const background = isPlayable ? '#98f795' : isMostRecentlyPlayed ? '#fff759' : '#98f795';
+    const background = isMostRecentlyPlayed ? '#fff715' : '#98f795';
 
     const player = useSelector((state: RootState) => state.player.localPlayer);
     const { game } = useSelector((state: RootState) => state.game);
