@@ -11,7 +11,7 @@ const ChallengeButton: React.FC = () => {
 
     const dispatch = useDispatch();
 
-    const enabled = game && player?.name === game.turnPlayerName && game.moves.length > 0;
+    const enabled = game && player?.name === game.turnPlayerName && game.moves.length > 0 && game.challenge === null;
 
     const createChallenge = (type: ChallengeType) => {
         if (game === null || player === null) {

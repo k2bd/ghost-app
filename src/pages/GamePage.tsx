@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import useInterval from 'react-useinterval';
 import ChallengeButton from '../components/ChallengeButton';
+import ChallengeResponseDialog from '../components/ChallengeResponseDialog';
 import GameBoard from '../components/GameBoard';
 import GhostNavbar from '../components/GhostNavbar';
 import PlayersList from '../components/PlayersList';
@@ -62,6 +63,7 @@ const GamePage: React.FC = () => {
                     </div>
                 </div>
             </div>
+            <ChallengeResponseDialog />
         </div>
     );
 };
