@@ -39,3 +39,36 @@ export const makeMove = createAsyncThunk<Game, { roomCode: string; move: Move }>
         return response.data as Game;
     },
 );
+
+export const makeChallenge = createAsyncThunk<Game, { roomCode: string; challenge: NewChallenge }>(
+    'games/makeChallenge',
+    async ({ roomCode, challenge }, thunkApi) => {
+        const response = await ghostApi.post(`/game/${roomCode}/challenge`, challenge);
+        if (response.status !== 200) {
+            return thunkApi.rejectWithValue({ statusCode: response.status });
+        }
+        return response.data as Game;
+    },
+);
+
+export const makeChallengeResponse = createAsyncThunk<Game, { roomCode: string; challengeResponse: ChallengeResponse }>(
+    'games/makeChallengeResponse',
+    async ({ roomCode, challengeResponse }, thunkApi) => {
+        const response = await ghostApi.post(`/game/${roomCode}/challenge-response`, challengeResponse);
+        if (response.status !== 200) {
+            return thunkApi.rejectWithValue({ statusCode: response.status });
+        }
+        return response.data as Game;
+    },
+);
+
+export const makeChallengeVote = createAsyncThunk<Game, { roomCode: string; vote: ChallengeVote }>(
+    'games/makeChallengeVote',
+    async ({ roomCode, vote }, thunkApi) => {
+        const response = await ghostApi.post(`/game/${roomCode}/challenge-vote`, vote);
+        if (response.status !== 200) {
+            return thunkApi.rejectWithValue({ statusCode: response.status });
+        }
+        return response.data as Game;
+    },
+);

@@ -30,6 +30,11 @@ const HowToPlay: React.FC = () => {
                         recent turn was made in. Remember that words being built must start at the edges. (TODO:
                         examples).
                     </p>
+                    <p>
+                        When a challenge has been made, players must vote on whether the challenge is successful. If it
+                        is, the challenged player will be removed from the game. If it fails, the challenger is removed.
+                        A challenge must get at least 50% of the votes to pass.
+                    </p>
                 </div>
             </Dialog>
         </div>

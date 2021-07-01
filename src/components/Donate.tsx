@@ -1,15 +1,19 @@
-import { Button } from '@blueprintjs/core';
+import { AnchorButton } from '@blueprintjs/core';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 
 const Donate: React.FC = () => {
-    const onClick = () => {
-        window.open('https://www.buymeacoffee.com/k2bd', '_blank');
-    };
+    const buttonText = isMobile ? '' : 'Support';
 
-    const buttonText = isMobile ? '' : 'Buy me a coffee';
-
-    return <Button icon="dollar" text={buttonText} onClick={onClick} intent="primary" />;
+    return (
+        <AnchorButton
+            icon="dollar"
+            text={buttonText}
+            href="https://www.buymeacoffee.com/k2bd"
+            target="_blank"
+            intent="primary"
+        />
+    );
 };
 
 export default Donate;
