@@ -4,6 +4,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import useInterval from 'react-useinterval';
 import ChallengeButton from '../components/ChallengeButton';
 import ChallengeResponseDialog from '../components/ChallengeResponseDialog';
+import ChallengeVoteDialog from '../components/ChallengeVoteDialog';
 import GameBoard from '../components/GameBoard';
 import GhostNavbar from '../components/GhostNavbar';
 import PlayersList from '../components/PlayersList';
@@ -64,6 +65,7 @@ const GamePage: React.FC = () => {
                 </div>
             </div>
             <ChallengeResponseDialog />
+            <ChallengeVoteDialog />
         </div>
     );
 };
