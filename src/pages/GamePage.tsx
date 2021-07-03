@@ -1,6 +1,7 @@
+import { Spinner } from '@blueprintjs/core';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import useInterval from 'react-useinterval';
 import ChallengeButton from '../components/ChallengeButton';
 import ChallengeResponseDialog from '../components/ChallengeResponseDialog';
@@ -8,7 +9,7 @@ import ChallengeVoteDialog from '../components/ChallengeVoteDialog';
 import GameBoard from '../components/GameBoard';
 import GhostNavbar from '../components/GhostNavbar';
 import PlayersList from '../components/PlayersList';
-import { createGame, fetchGameByRoomCode, joinGame } from '../redux/games/actions';
+import { createGame, fetchGameByRoomCode, joinGame, resetGame } from '../redux/games/actions';
 import { RootState } from '../redux/store';
 
 import './GamePage.css';
@@ -18,16 +19,15 @@ const POLLING_INTERVAL_MS = 1000;
 const GamePage: React.FC = () => {
     const { roomCode } = useParams<{ roomCode: string }>();
     const player = useSelector((state: RootState) => state.player.localPlayer);
-    const { game, gameLoadStatus, joined } = useSelector((state: RootState) => state.game);
+    const { game, gameLoadStatus, joined, joinedRoomCode } = useSelector((state: RootState) => state.game);
     const dispatch = useDispatch();
 
-    const history = useHistory();
+    // Poll game state
+    useInterval(() => dispatch(fetchGameByRoomCode(roomCode)), POLLING_INTERVAL_MS);
 
-    if (player === null) {
-        // TODO: temporary solution until we store player state locally to
-        // defend against refreshes
-        history.push('/');
-        return <div></div>;
+    if (joinedRoomCode && joinedRoomCode !== roomCode) {
+        console.log(`${joinedRoomCode} != ${roomCode}`);
+        dispatch(resetGame());
     }
 
     if (game === null) {
@@ -40,13 +40,10 @@ const GamePage: React.FC = () => {
                 break;
         }
     } else {
-        if (!joined) {
+        if (player !== null && !joined) {
             dispatch(joinGame({ roomCode, player }));
         }
     }
-
-    // Poll game state, for now
-    useInterval(() => dispatch(fetchGameByRoomCode(roomCode)), POLLING_INTERVAL_MS);
 
     return (
         <div>

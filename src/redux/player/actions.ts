@@ -1,3 +1,9 @@
-import { createAction } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import ghostApi from '../api';
 
-export const setPlayerName = createAction<string, 'setPlayerName'>('setPlayerName');
+export const logOut = createAction('player/logOut');
+
+export const loginGuest = createAsyncThunk<Player, GuestLogin>('player/loginGuest', async (guestInfo: GuestLogin) => {
+    const response = await ghostApi.post(`/login/guest`, guestInfo);
+    return response.data as Player;
+});

@@ -1,9 +1,11 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import ghostApi from '../api';
 
 interface Error {
     statusCode: number;
 }
+
+export const resetGame = createAction('games/resetGame');
 
 export const fetchGameByRoomCode = createAsyncThunk<Game, string, { rejectValue: Error }>(
     'games/fetchGameByRoomCode',
