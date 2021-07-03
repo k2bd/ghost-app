@@ -23,6 +23,7 @@ const HowToPlay: React.FC = () => {
                         A new tile can be placed either at the first free tile along the horizontal or vertical edges,
                         or at any tile that has at least 3 neighbors (including diagonals). TODO: example images.
                     </p>
+                    <p>The most recently played tile is coloured differently.</p>
                     <h3>Challenges</h3>
                     <p>
                         A move can be challenged by any player. The challenge can be because the player believes the

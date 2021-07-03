@@ -1,4 +1,5 @@
 import React from 'react';
+import Avatar from 'react-avatar';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 
@@ -10,7 +11,13 @@ type PlayerProps = {
 
 const PlayerRow: React.FC<PlayerProps> = ({ player, turnPlayer, loser }: PlayerProps) => {
     const playerName = turnPlayer ? <b>{player.name}</b> : loser ? <s>{player.name}</s> : player.name;
-    return <p>{playerName}</p>;
+    return (
+        // TODO create player card component
+        <div>
+            <Avatar size="20" round={true} src={player.imageUrl} />
+            {playerName}
+        </div>
+    );
 };
 
 const PlayersList: React.FC = () => {

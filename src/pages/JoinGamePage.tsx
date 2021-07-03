@@ -1,25 +1,30 @@
+import { Button } from '@blueprintjs/core';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import GameJoinInfo from '../components/GameJoinInfo';
 import GhostNavbar from '../components/GhostNavbar';
-import { setPlayerName } from '../redux/player/actions';
+import { logOut } from '../redux/player/actions';
 import './JoinGamePage.css';
 
 const JoinGamePage: React.FC = () => {
-    const dispatch = useDispatch();
     const history = useHistory();
+    const dispatch = useDispatch();
 
-    const joinGame = (roomCode: string, playerName: string) => {
-        dispatch(setPlayerName(playerName));
+    const joinGame = (roomCode: string) => {
         history.push(`/room/${roomCode}`);
+    };
+
+    const doLogout = () => {
+        dispatch(logOut());
     };
 
     return (
         <div className="game-join-page">
             <GhostNavbar />
             <div className="vertical-centering">
-                <GameJoinInfo joinGame={(roomCode, playerName) => joinGame(roomCode, playerName)} />
+                <GameJoinInfo joinGame={(roomCode) => joinGame(roomCode)} />
+                <Button text="Logout" onClick={() => doLogout()} icon="log-out" />
             </div>
         </div>
     );

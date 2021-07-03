@@ -1,5 +1,10 @@
+type GuestLogin = {
+    name: string;
+};
+
 type Player = {
     name: string;
+    imageUrl: string;
 };
 
 type Position = {
@@ -49,3 +54,4 @@ type Game = {
 };
 
 type GameLoadStatus = 'idle' | 'loading' | 'gameDoesNotExist' | 'creatingGame' | 'error' | 'joining';
+type LoginStatus = 'notLoggedIn' | 'loggingIn' | 'loggedIn';

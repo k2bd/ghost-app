@@ -4,7 +4,7 @@ import playerReducer from './player/reducers';
 
 const rootReducer = combineReducers({
     game: gamesSlice.reducer,
-    player: playerReducer,
+    player: playerReducer.reducer,
 });
 
 export default rootReducer;
