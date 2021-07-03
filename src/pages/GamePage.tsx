@@ -25,10 +25,6 @@ const GamePage: React.FC = () => {
     // Poll game state
     useInterval(() => dispatch(fetchGameByRoomCode(roomCode)), POLLING_INTERVAL_MS);
 
-    if (player === null) {
-        return <Spinner />;
-    }
-
     if (joinedRoomCode && joinedRoomCode !== roomCode) {
         console.log(`${joinedRoomCode} != ${roomCode}`);
         dispatch(resetGame());
@@ -44,7 +40,7 @@ const GamePage: React.FC = () => {
                 break;
         }
     } else {
-        if (!joined) {
+        if (player !== null && !joined) {
             dispatch(joinGame({ roomCode, player }));
         }
     }
