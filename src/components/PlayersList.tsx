@@ -11,7 +11,7 @@ type PlayerProps = {
 };
 
 const PlayerRow: React.FC<PlayerProps> = ({ player, turnPlayer, loser }: PlayerProps) => {
-    const playerName = loser ? <s>{player.name}</s> : player.name;
+    const playerName = turnPlayer ? <b>{player.name}</b> : loser ? <s>{player.name}</s> : player.name;
     const intent = turnPlayer ? Intent.PRIMARY : Intent.NONE;
     return (
         <Tag
