@@ -4,6 +4,7 @@ import { RootState } from '../redux/store';
 import GameTile from './GameTile';
 import deepEqual from 'deep-equal';
 import { Spinner, SpinnerSize } from '@blueprintjs/core';
+import Draggable from 'react-draggable';
 
 const neighborCount = (tiles: (string | null)[][], { x, y }: Position): number =>
     tiles
@@ -72,7 +73,11 @@ const GameBoard: React.FC = () => {
         </div>
     ));
 
-    return <div style={{ display: 'flex' }}>{renderedTiles}</div>;
+    return (
+        <Draggable cancel=".tile-input">
+            <div style={{ display: 'flex' }}>{renderedTiles}</div>
+        </Draggable>
+    );
 };
 
 export default GameBoard;

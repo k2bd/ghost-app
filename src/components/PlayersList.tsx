@@ -1,6 +1,7 @@
-import { Intent, Tag } from '@blueprintjs/core';
-import React from 'react';
+import { Button, Collapse, Intent, Tag } from '@blueprintjs/core';
+import React, { useState } from 'react';
 import Avatar from 'react-avatar';
+import { isMobile } from 'react-device-detect';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 
@@ -28,6 +29,7 @@ const PlayerRow: React.FC<PlayerProps> = ({ player, turnPlayer, loser }: PlayerP
 
 const PlayersList: React.FC = () => {
     const { game } = useSelector((state: RootState) => state.game);
+    const [expanded, setExpanded] = useState<boolean>(!isMobile);
 
     const players = game
         ? game.players.map((player, index) => (
@@ -41,9 +43,17 @@ const PlayersList: React.FC = () => {
 
     return (
         <div>
-            <h4>Players</h4>
-            {players}
-            {losers}
+            <Button
+                fill={true}
+                outlined={true}
+                text={<b>Players</b>}
+                rightIcon={expanded ? 'chevron-down' : 'chevron-left'}
+                onClick={() => setExpanded(!expanded)}
+            />
+            <Collapse isOpen={expanded}>
+                {players}
+                {losers}
+            </Collapse>
         </div>
     );
 };

@@ -12,7 +12,7 @@ type Props = {
 };
 
 const GameTile: React.FC<Props> = ({ letter, position, isPlayable, isMostRecentlyPlayed }: Props) => {
-    const background = isMostRecentlyPlayed ? '#fff715' : '#98f795';
+    const background = isPlayable ? '#fff715' : isMostRecentlyPlayed ? '#40acde' : '#98f795';
 
     const player = useSelector((state: RootState) => state.player.localPlayer);
     const { game } = useSelector((state: RootState) => state.game);
@@ -37,11 +37,12 @@ const GameTile: React.FC<Props> = ({ letter, position, isPlayable, isMostRecentl
 
     const inputDisabled = player?.name !== game?.turnPlayerName || !isPlayable;
 
-    const content = (
+    const content = inputDisabled ? (
+        <div className="tile-text">{letter}</div>
+    ) : (
         <input
             type="text"
             className="tile-input"
-            disabled={inputDisabled}
             value={letter || ''}
             size={1}
             onChange={(event) => submitMove(event.target.value)}

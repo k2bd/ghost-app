@@ -28,8 +28,8 @@ const ChallengeVoteDialog: React.FC = () => {
     let messageBody;
     switch (game.challenge.type) {
         case 'NO_VALID_WORDS': {
-            const responseRow = game.challenge.response?.rowWord || '';
-            const responseCol = game.challenge.response?.colWord || '';
+            const responseRow = game.challenge.response?.rowWord.toUpperCase() || '';
+            const responseCol = game.challenge.response?.colWord.toUpperCase() || '';
             messageBody = (
                 <div>
                     <p>

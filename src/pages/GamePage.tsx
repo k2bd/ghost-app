@@ -49,13 +49,13 @@ const GamePage: React.FC = () => {
             <div className="with-sidebar">
                 <div className="sidebar">
                     <PlayersList />
+                    <ChallengeButton />
                 </div>
                 <div className="not-sidebar">
                     <div className="game-page">
                         <div className="vertical-centering">
                             <GameBoard />
                         </div>
-                        <ChallengeButton />
                     </div>
                 </div>
             </div>

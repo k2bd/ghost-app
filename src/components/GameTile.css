@@ -17,6 +17,11 @@
   width: 100%;
 }
 
+.tile-text {
+  width: 80%;
+  text-align: center;
+}
+
 .tile-input {
   width: 80%;
   text-align: center;

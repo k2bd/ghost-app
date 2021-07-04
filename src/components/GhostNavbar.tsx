@@ -51,7 +51,7 @@ const GhostNavbar: React.FC<Props> = ({ roomCode }: Props) => {
                         onClick={() => {
                             history.push('/');
                         }}
-                        minimal={true}
+                        outlined={true}
                     />
                 </Navbar.Heading>
                 {playerComponent}
