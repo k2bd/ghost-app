@@ -20,7 +20,12 @@ const LoginDialog: React.FC<Props> = ({ enabled }: Props) => {
     return (
         <Dialog isOpen={enabled} title="Login" isCloseButtonShown={false} icon="user">
             <div className={Classes.DIALOG_BODY}>
-                <form onSubmit={() => guestLogin()}>
+                <form
+                    onSubmit={(event) => {
+                        event.preventDefault();
+                        guestLogin();
+                    }}
+                >
                     <FormGroup label="Login as Guest">
                         <div className={Classes.FORM_CONTENT}>
                             <div style={{ display: 'flex', flexDirection: 'row' }}>
