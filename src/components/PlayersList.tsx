@@ -1,3 +1,4 @@
+import { Intent, Tag } from '@blueprintjs/core';
 import React from 'react';
 import Avatar from 'react-avatar';
 import { useSelector } from 'react-redux';
@@ -10,13 +11,18 @@ type PlayerProps = {
 };
 
 const PlayerRow: React.FC<PlayerProps> = ({ player, turnPlayer, loser }: PlayerProps) => {
-    const playerName = turnPlayer ? <b>{player.name}</b> : loser ? <s>{player.name}</s> : player.name;
+    const playerName = loser ? <s>{player.name}</s> : player.name;
+    const intent = turnPlayer ? Intent.PRIMARY : Intent.NONE;
     return (
-        // TODO create player card component
-        <div>
-            <Avatar size="20" round={true} src={player.imageUrl} />
+        <Tag
+            fill={true}
+            minimal={loser}
+            intent={intent}
+            large={true}
+            icon={<Avatar size="20" round={true} src={player.imageUrl} />}
+        >
             {playerName}
-        </div>
+        </Tag>
     );
 };
 
@@ -34,11 +40,11 @@ const PlayersList: React.FC = () => {
         : [];
 
     return (
-        <>
+        <div>
             <h4>Players</h4>
             {players}
             {losers}
-        </>
+        </div>
     );
 };
 

@@ -7,7 +7,7 @@ import {
     makeChallengeResponse,
     makeChallengeVote,
     makeMove,
-    resetGame,
+    reloadGame,
 } from './actions';
 
 const INITIAL_STATE = {
@@ -22,8 +22,7 @@ const gamesSlice = createSlice({
     initialState: INITIAL_STATE,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(resetGame, (state) => {
-            console.log('Resetting local state');
+        builder.addCase(reloadGame, (state) => {
             state.game = INITIAL_STATE.game;
             state.gameLoadStatus = INITIAL_STATE.gameLoadStatus;
             state.joined = INITIAL_STATE.joined;

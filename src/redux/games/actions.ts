@@ -5,7 +5,7 @@ interface Error {
     statusCode: number;
 }
 
-export const resetGame = createAction('games/resetGame');
+export const reloadGame = createAction('games/reloadGame');
 
 export const fetchGameByRoomCode = createAsyncThunk<Game, string, { rejectValue: Error }>(
     'games/fetchGameByRoomCode',

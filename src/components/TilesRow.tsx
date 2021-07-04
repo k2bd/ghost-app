@@ -16,8 +16,6 @@ export const rowEntries = (moves: Move[], rowIndex: number): (string | null)[] =
         }
     });
 
-    console.log(rowWithNulls);
-
     return rowWithNulls;
 };
 

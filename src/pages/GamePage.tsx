@@ -8,7 +8,7 @@ import ChallengeVoteDialog from '../components/ChallengeVoteDialog';
 import GameBoard from '../components/GameBoard';
 import GhostNavbar from '../components/GhostNavbar';
 import PlayersList from '../components/PlayersList';
-import { createGame, fetchGameByRoomCode, joinGame, resetGame } from '../redux/games/actions';
+import { createGame, fetchGameByRoomCode, joinGame, reloadGame } from '../redux/games/actions';
 import { RootState } from '../redux/store';
 
 import './GamePage.css';
@@ -25,8 +25,7 @@ const GamePage: React.FC = () => {
     useInterval(() => dispatch(fetchGameByRoomCode(roomCode)), POLLING_INTERVAL_MS);
 
     if (joinedRoomCode && joinedRoomCode !== roomCode) {
-        console.log(`${joinedRoomCode} != ${roomCode}`);
-        dispatch(resetGame());
+        dispatch(reloadGame());
     }
 
     if (game === null) {
