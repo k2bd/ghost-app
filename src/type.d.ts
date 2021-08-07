@@ -46,6 +46,8 @@ type Challenge = NewChallenge & {
 
 type Game = {
     roomCode: string;
+    started: boolean;
+    winner: Player | null;
     players: Player[];
     losers: Player[];
     turnPlayerName: string;

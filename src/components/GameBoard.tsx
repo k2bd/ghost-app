@@ -1,10 +1,9 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
 import GameTile from './GameTile';
 import deepEqual from 'deep-equal';
 import { Spinner, SpinnerSize } from '@blueprintjs/core';
 import Draggable from 'react-draggable';
+import useGame from '../hooks/useGame';
 
 const neighborCount = (tiles: (string | null)[][], { x, y }: Position): number =>
     tiles
@@ -45,7 +44,7 @@ const boardSize = (moves: Move[]): number => {
 };
 
 const GameBoard: React.FC = () => {
-    const { game, gameLoadStatus } = useSelector((state: RootState) => state.game);
+    const { game, gameLoadStatus } = useGame();
 
     if (['gameDoesNotExist', 'creatingGame', 'joining'].includes(gameLoadStatus)) {
         return <Spinner size={SpinnerSize.LARGE} />;

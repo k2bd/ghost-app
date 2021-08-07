@@ -8,6 +8,7 @@ import {
     makeChallengeVote,
     makeMove,
     reloadGame,
+    startGame,
 } from './actions';
 
 const INITIAL_STATE = {
@@ -56,6 +57,9 @@ const gamesSlice = createSlice({
         builder.addCase(createGame.rejected, (state) => {
             state.game = null;
             state.gameLoadStatus = 'error';
+        });
+        builder.addCase(startGame.fulfilled, (state, action) => {
+            state.game = action.payload;
         });
         builder.addCase(joinGame.pending, (state) => {
             state.gameLoadStatus = 'joining';

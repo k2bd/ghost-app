@@ -31,6 +31,11 @@ export const joinGame = createAsyncThunk<Game, { roomCode: string; player: Playe
     },
 );
 
+export const startGame = createAsyncThunk<Game, string>('games/startGame', async (roomCode) => {
+    const response = await ghostApi.post(`/game/${roomCode}/start`);
+    return response.data as Game;
+});
+
 export const makeMove = createAsyncThunk<Game, { roomCode: string; move: Move }>(
     'games/makeMove',
     async ({ roomCode, move }, thunkApi) => {

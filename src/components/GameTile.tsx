@@ -1,7 +1,8 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import useGame from '../hooks/useGame';
+import usePlayer from '../hooks/usePlayer';
 import { makeMove } from '../redux/games/actions';
-import { RootState } from '../redux/store';
 import './GameTile.css';
 
 type Props = {
@@ -14,8 +15,8 @@ type Props = {
 const GameTile: React.FC<Props> = ({ letter, position, isPlayable, isMostRecentlyPlayed }: Props) => {
     const background = isPlayable ? '#fff715' : isMostRecentlyPlayed ? '#40acde' : '#98f795';
 
-    const player = useSelector((state: RootState) => state.player.localPlayer);
-    const { game } = useSelector((state: RootState) => state.game);
+    const player = usePlayer();
+    const { game } = useGame();
 
     const dispatch = useDispatch();
 
@@ -35,7 +36,7 @@ const GameTile: React.FC<Props> = ({ letter, position, isPlayable, isMostRecentl
         }
     };
 
-    const inputDisabled = player?.name !== game?.turnPlayerName || !isPlayable;
+    const inputDisabled = player?.name !== game?.turnPlayerName || !isPlayable || game?.winner !== null;
 
     const content = inputDisabled ? (
         <div className="tile-text">{letter}</div>
