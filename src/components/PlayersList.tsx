@@ -1,4 +1,4 @@
-import { Button, Collapse, Intent, Tag } from '@blueprintjs/core';
+import { Button, Collapse, Icon, Intent, Tag } from '@blueprintjs/core';
 import React, { useState } from 'react';
 import Avatar from 'react-avatar';
 import { isMobile } from 'react-device-detect';
@@ -9,11 +9,13 @@ type PlayerProps = {
     player: Player;
     turnPlayer: boolean;
     loser: boolean;
+    winner: boolean;
 };
 
-const PlayerRow: React.FC<PlayerProps> = ({ player, turnPlayer, loser }: PlayerProps) => {
+const PlayerRow: React.FC<PlayerProps> = ({ player, turnPlayer, loser, winner }: PlayerProps) => {
     const playerName = turnPlayer ? <b>{player.name}</b> : loser ? <s>{player.name}</s> : player.name;
     const intent = turnPlayer ? Intent.PRIMARY : Intent.NONE;
+    const icon = winner ? <Icon icon="crown" /> : null;
     return (
         <Tag
             fill={true}
@@ -22,7 +24,9 @@ const PlayerRow: React.FC<PlayerProps> = ({ player, turnPlayer, loser }: PlayerP
             large={true}
             icon={<Avatar size="20" round={true} src={player.imageUrl} />}
         >
+            {icon}
             {playerName}
+            {icon}
         </Tag>
     );
 };
@@ -32,13 +36,24 @@ const PlayersList: React.FC = () => {
     const [expanded, setExpanded] = useState<boolean>(!isMobile);
 
     const players = game
-        ? game.players.map((player, index) => (
-              <PlayerRow player={player} turnPlayer={player.name == game.turnPlayerName} loser={false} key={index} />
-          ))
+        ? game.players.map((player, index) => {
+              const winner = game.winner !== null && game.winner.name === player.name;
+              return (
+                  <PlayerRow
+                      player={player}
+                      turnPlayer={player.name == game.turnPlayerName}
+                      loser={false}
+                      key={index}
+                      winner={winner}
+                  />
+              );
+          })
         : [];
 
     const losers = game
-        ? game.losers.map((player, index) => <PlayerRow player={player} turnPlayer={false} loser={true} key={index} />)
+        ? game.losers.map((player, index) => (
+              <PlayerRow player={player} turnPlayer={false} loser={true} key={index} winner={false} />
+          ))
         : [];
 
     return (
