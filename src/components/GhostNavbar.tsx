@@ -22,12 +22,7 @@ const GhostNavbar: React.FC<Props> = ({ roomCode }: Props) => {
     const playerComponent =
         player && !isMobile ? (
             // TODO create player card component
-            <Tag
-                fill={true}
-                minimal={true}
-                large={true}
-                icon={<Avatar size="20" round={true} src={player?.imageUrl} />}
-            >
+            <Tag fill minimal large icon={<Avatar size="20" round src={player?.imageUrl} />}>
                 {player?.name}
             </Tag>
         ) : (
