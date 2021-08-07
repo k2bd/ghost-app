@@ -12,12 +12,6 @@ const PreGameCard: React.FC = () => {
     const { game, joined } = useGame();
     const dispatch = useDispatch();
 
-    const handleJoinGame = () => {
-        if (player !== null && !joined && game && !game.started) {
-            dispatch(joinGame({ roomCode, player }));
-        }
-    };
-
     const handleStartGame = () => {
         if (game && !game.started) {
             dispatch(startGame(roomCode));
@@ -27,10 +21,9 @@ const PreGameCard: React.FC = () => {
     return (
         <Card elevation={2}>
             <H5>Welcome to the game!</H5>
-            <p>The game has not started yet. </p>
+            <p>The game has not started yet. Start the game when everyone has joined.</p>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <Button text="Join" disabled={joined} onClick={handleJoinGame} />
-                <Button text="Start game" intent={Intent.PRIMARY} onClick={handleStartGame} />
+                <Button text="Everyone's in!" intent={Intent.PRIMARY} onClick={handleStartGame} />
             </div>
         </Card>
     );

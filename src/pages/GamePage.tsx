@@ -9,8 +9,9 @@ import GhostNavbar from '../components/GhostNavbar';
 import PlayersList from '../components/PlayersList';
 import PreGameCard from '../components/PreGameCard';
 import useGame from '../hooks/useGame';
+import usePlayer from '../hooks/usePlayer';
 import useRoomCode from '../hooks/useRoomCode';
-import { createGame, fetchGameByRoomCode, reloadGame } from '../redux/games/actions';
+import { createGame, fetchGameByRoomCode, joinGame, reloadGame } from '../redux/games/actions';
 
 import './GamePage.css';
 
@@ -18,7 +19,8 @@ const POLLING_INTERVAL_MS = 1000;
 
 const GamePage: React.FC = () => {
     const roomCode = useRoomCode();
-    const { game, gameLoadStatus, joinedRoomCode } = useGame();
+    const { game, gameLoadStatus, joined, joinedRoomCode } = useGame();
+    const player = usePlayer();
     const dispatch = useDispatch();
 
     // Poll game state
@@ -36,6 +38,10 @@ const GamePage: React.FC = () => {
             case 'gameDoesNotExist':
                 dispatch(createGame(roomCode));
                 break;
+        }
+    } else if (!joined && !game.started) {
+        if (player !== null && !joined && game && !game.started) {
+            dispatch(joinGame({ roomCode, player }));
         }
     }
 
