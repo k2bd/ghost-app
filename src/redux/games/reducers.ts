@@ -17,6 +17,7 @@ const INITIAL_STATE = {
     joined: false,
     joinedRoomCode: null as string | null,
 };
+export type GamesSliceState = typeof INITIAL_STATE;
 
 const gamesSlice = createSlice({
     name: 'games',

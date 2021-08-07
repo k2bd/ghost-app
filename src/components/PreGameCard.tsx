@@ -1,15 +1,13 @@
 import React from 'react';
 import { Button, Card, H5, Intent } from '@blueprintjs/core';
 import useGame from '../hooks/useGame';
-import usePlayer from '../hooks/usePlayer';
 import useRoomCode from '../hooks/useRoomCode';
 import { useDispatch } from 'react-redux';
-import { joinGame, startGame } from '../redux/games/actions';
+import { startGame } from '../redux/games/actions';
 
 const PreGameCard: React.FC = () => {
     const roomCode = useRoomCode();
-    const player = usePlayer();
-    const { game, joined } = useGame();
+    const { game } = useGame();
     const dispatch = useDispatch();
 
     const handleStartGame = () => {

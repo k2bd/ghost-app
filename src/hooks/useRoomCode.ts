@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
 
-const useRoomCode = () => useParams<{ roomCode: string }>().roomCode;
+const useRoomCode = (): string => useParams<{ roomCode: string }>().roomCode;
 
 export default useRoomCode;
