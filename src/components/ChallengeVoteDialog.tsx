@@ -87,8 +87,16 @@ const ChallengeVoteDialog: React.FC = () => {
                 {messageBody}
                 <p>Is the challenge successful?</p>
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
-                    <Button text="Yes" onClick={() => submitVote(true)} disabled={submitted()} />
-                    <Button text="No" onClick={() => submitVote(false)} disabled={submitted()} />
+                    <Button
+                        text={`Yes, kick ${game.challenge.move.playerName}`}
+                        onClick={() => submitVote(true)}
+                        disabled={submitted()}
+                    />
+                    <Button
+                        text={`No, kick ${game.challenge.challengerName}`}
+                        onClick={() => submitVote(false)}
+                        disabled={submitted()}
+                    />
                 </div>
             </div>
         </Dialog>
