@@ -1,6 +1,6 @@
-import { Button, Classes, Dialog, FormGroup, InputGroup } from '@blueprintjs/core';
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { Classes, Dialog } from '@blueprintjs/core';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 
 const ChallengeIssuedDialog: React.FC = () => {
