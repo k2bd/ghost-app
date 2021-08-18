@@ -98,7 +98,7 @@ const GamePage: React.FC = () => {
                 </div>
                 <div className="not-sidebar">
                     <div className="game-page">
-                        <div className="vertical-centering">{inGame ? mainContent : spinner}</div>
+                        <div className="vertical-centering">{inGame || game?.started ? mainContent : spinner}</div>
                     </div>
                 </div>
             </div>
