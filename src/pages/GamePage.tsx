@@ -60,6 +60,12 @@ const GamePage: React.FC = () => {
             <Spinner size={SpinnerSize.LARGE} />;
         </div>
     );
+    const inGame =
+        [...(game?.players || []), ...(game?.losers || [])].find((p) => p.name === player?.name) !== undefined;
+    console.log(game?.players);
+    console.log(game?.losers);
+    console.log(player);
+    console.log(inGame);
 
     const mainContent = game?.started ? <GameBoard /> : <PreGameCard />;
 
@@ -73,7 +79,7 @@ const GamePage: React.FC = () => {
                 </div>
                 <div className="not-sidebar">
                     <div className="game-page">
-                        <div className="vertical-centering">{joined ? mainContent : spinner}</div>
+                        <div className="vertical-centering">{inGame ? mainContent : spinner}</div>
                     </div>
                 </div>
             </div>
