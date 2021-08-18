@@ -1,3 +1,4 @@
+import { Spinner, SpinnerSize } from '@blueprintjs/core';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import useInterval from 'react-useinterval';
@@ -44,6 +45,21 @@ const GamePage: React.FC = () => {
             dispatch(joinGame({ roomCode, player }));
         }
     }
+
+    if (!joined)
+        return (
+            <div
+                style={{
+                    position: 'fixed',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translateX(-50%) translateY(-50%)',
+                    msTransform: 'translateX(-50%) translateY(-50%)',
+                }}
+            >
+                <Spinner size={SpinnerSize.LARGE} />;
+            </div>
+        );
 
     const mainContent = game?.started ? <GameBoard /> : <PreGameCard />;
 
