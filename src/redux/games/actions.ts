@@ -79,3 +79,5 @@ export const makeChallengeVote = createAsyncThunk<Game, { roomCode: string; vote
         return response.data as Game;
     },
 );
+
+export const resetPolling = createAction('games/resetPolling');

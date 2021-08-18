@@ -1,5 +1,6 @@
-import { Spinner, SpinnerSize } from '@blueprintjs/core';
-import React from 'react';
+import { Alert, Spinner, SpinnerSize } from '@blueprintjs/core';
+import moment from 'moment';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import useInterval from 'react-useinterval';
 import ChallengeButton from '../components/ChallengeButton';
@@ -13,20 +14,42 @@ import PreGameCard from '../components/PreGameCard';
 import useGame from '../hooks/useGame';
 import usePlayer from '../hooks/usePlayer';
 import useRoomCode from '../hooks/useRoomCode';
-import { createGame, fetchGameByRoomCode, joinGame, reloadGame } from '../redux/games/actions';
+import { createGame, fetchGameByRoomCode, joinGame, reloadGame, resetPolling } from '../redux/games/actions';
 
 import './GamePage.css';
 
 const POLLING_INTERVAL_MS = 1000;
+const POLLING_TIMEOUT_MS = 5 * 60 * 1000;
 
 const GamePage: React.FC = () => {
     const roomCode = useRoomCode();
-    const { game, gameLoadStatus, joined, joinedRoomCode } = useGame();
+    const { game, gameLoadStatus, joined, joinedRoomCode, latestAction } = useGame();
     const player = usePlayer();
     const dispatch = useDispatch();
 
-    // Poll game state
-    useInterval(() => dispatch(fetchGameByRoomCode(roomCode)), POLLING_INTERVAL_MS);
+    // Poll game state - TODO extract into a polling alert hook
+    const [polling, setPolling] = useState(true);
+    useInterval(() => {
+        if (polling) dispatch(fetchGameByRoomCode(roomCode));
+    }, POLLING_INTERVAL_MS);
+    useEffect(() => {
+        setPolling(moment().diff(latestAction) < POLLING_TIMEOUT_MS);
+    }, [game, latestAction]);
+    const resetPollingAlert = (
+        <Alert
+            isOpen={!polling}
+            canOutsideClickCancel
+            onClose={() => {
+                dispatch(resetPolling());
+            }}
+            confirmButtonText="I'm still here!"
+        >
+            <p>
+                {"Are you still there? Polling has been paused because there hasn't been activity for "}
+                {moment.duration(POLLING_TIMEOUT_MS, 'milliseconds').humanize()}.
+            </p>
+        </Alert>
+    );
 
     if (joinedRoomCode && joinedRoomCode !== roomCode) {
         dispatch(reloadGame());
@@ -42,7 +65,7 @@ const GamePage: React.FC = () => {
                 break;
         }
     } else if (!joined && !game.started) {
-        if (player !== null && !joined && game && !game.started) {
+        if (player !== null && !joined && game && !game.started && gameLoadStatus !== 'joining') {
             dispatch(joinGame({ roomCode, player }));
         }
     }
@@ -62,10 +85,6 @@ const GamePage: React.FC = () => {
     );
     const inGame =
         [...(game?.players || []), ...(game?.losers || [])].find((p) => p.name === player?.name) !== undefined;
-    console.log(game?.players);
-    console.log(game?.losers);
-    console.log(player);
-    console.log(inGame);
 
     const mainContent = game?.started ? <GameBoard /> : <PreGameCard />;
 
@@ -83,6 +102,7 @@ const GamePage: React.FC = () => {
                     </div>
                 </div>
             </div>
+            {resetPollingAlert}
             <ChallengeResponseDialog />
             <ChallengeIssuedDialog />
             <ChallengeVoteDialog />
