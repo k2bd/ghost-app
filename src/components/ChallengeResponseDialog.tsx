@@ -43,7 +43,10 @@ const ChallengeResponseDialog: React.FC = () => {
                     Please provide words that can be made from the row and column of your last move, containing the
                     placed letters and adding as many letters to the end as you want.
                 </p>
-                <p>Remember the words should be at least 4 letters long.</p>
+                <p>
+                    Remember the words should be at least 4 letters long and must start at the beginning of the row or
+                    column.
+                </p>
 
                 <FormGroup label="Row:" inline={true}>
                     <TilesRow entries={row} />

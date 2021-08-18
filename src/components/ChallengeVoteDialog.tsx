@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Classes, Dialog, FormGroup } from '@blueprintjs/core';
+import { Button, Classes, Dialog, FormGroup, Spinner, SpinnerSize, Tag } from '@blueprintjs/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeChallengeVote } from '../redux/games/actions';
 import { RootState } from '../redux/store';
@@ -78,6 +78,14 @@ const ChallengeVoteDialog: React.FC = () => {
         }
     }
 
+    const stillVoting = (
+        <div style={{ paddingTop: '3px' }}>
+            <Tag intent="primary" minimal icon={<Spinner size={SpinnerSize.SMALL} />}>
+                Players are still voting...
+            </Tag>
+        </div>
+    );
+
     return (
         <Dialog isOpen={enabled} title="Challenge!" isCloseButtonShown={false} icon="flag">
             <div className={Classes.DIALOG_BODY}>
@@ -98,6 +106,7 @@ const ChallengeVoteDialog: React.FC = () => {
                         disabled={submitted()}
                     />
                 </div>
+                {submitted() ? stillVoting : null}
             </div>
         </Dialog>
     );

@@ -3,6 +3,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import useInterval from 'react-useinterval';
 import ChallengeButton from '../components/ChallengeButton';
+import ChallengeIssuedDialog from '../components/ChallengeIssuedDialog';
 import ChallengeResponseDialog from '../components/ChallengeResponseDialog';
 import ChallengeVoteDialog from '../components/ChallengeVoteDialog';
 import GameBoard from '../components/GameBoard';
@@ -46,20 +47,19 @@ const GamePage: React.FC = () => {
         }
     }
 
-    if (!joined)
-        return (
-            <div
-                style={{
-                    position: 'fixed',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translateX(-50%) translateY(-50%)',
-                    msTransform: 'translateX(-50%) translateY(-50%)',
-                }}
-            >
-                <Spinner size={SpinnerSize.LARGE} />;
-            </div>
-        );
+    const spinner = (
+        <div
+            style={{
+                position: 'fixed',
+                top: '50%',
+                left: '50%',
+                transform: 'translateX(-50%) translateY(-50%)',
+                msTransform: 'translateX(-50%) translateY(-50%)',
+            }}
+        >
+            <Spinner size={SpinnerSize.LARGE} />;
+        </div>
+    );
 
     const mainContent = game?.started ? <GameBoard /> : <PreGameCard />;
 
@@ -73,11 +73,12 @@ const GamePage: React.FC = () => {
                 </div>
                 <div className="not-sidebar">
                     <div className="game-page">
-                        <div className="vertical-centering">{mainContent}</div>
+                        <div className="vertical-centering">{joined ? mainContent : spinner}</div>
                     </div>
                 </div>
             </div>
             <ChallengeResponseDialog />
+            <ChallengeIssuedDialog />
             <ChallengeVoteDialog />
         </div>
     );
