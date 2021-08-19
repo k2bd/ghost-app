@@ -42,12 +42,12 @@ const HowToPlay: React.FC = () => {
                     <img src="https://imgur.com/C9ME23a.png" />
                     <p>
                         {
-                            "In this example, the tile to the right of the 'N' and below the 'E' are playable because they're the next free tiles on the top and left borders of the board, and the tile to the right of the 'X' is playable because it has 3 neighbors (the 'X', 'A', and 'N'). No other tiles are playable."
+                            "In this example, the tiles to the right of the 'N' and below the 'E' are playable because they're the next free tiles on the top and left borders of the board, and the tile to the right of the 'X' is playable because it has 3 neighbors (the 'X', 'A', and 'N'). No other tiles are playable."
                         }
                     </p>
                     <p>
                         {
-                            "When you make a move, you must be moving towards the completion of a 4+ letter word in both the row and column that your move is made in. In the above example, the player who placed the most recent move (the 'X') must be thinking of valid 4+ letter words starting with 'AX' and 'EX'. However, players must not actually complete 4+ letter words. Failing either condition leaves you vulnerable to a challenge. Of course, if you can't think of any valid moves, bluffing may be your only option."
+                            "When you make a move, you must be building towards the completion of a 4+ letter word in both the row and column that your move is made in. In the above example, the player who placed the most recent move (the 'X') must be thinking of valid 4+ letter words starting with 'AX' and 'EX'. However, players must not actually complete 4+ letter words. Failing either condition leaves you vulnerable to a challenge. Of course, if you can't think of any valid moves, bluffing may be your only option."
                         }
                     </p>
                     <h2>{'Challenges'}</h2>
